@@ -8,6 +8,11 @@ public class CustomerJourneyDTO {
     public List<TapDTO> getTaps() {
         return taps;
     }
+
+    public void setTaps(List<TapDTO> taps) {
+        this.taps = taps;
+    }
+
     public static class TapDTO {
         private long unixTimestamp;
         private int customerId;
@@ -24,6 +29,19 @@ public class CustomerJourneyDTO {
 
         public String getStation() {
             return station;
+        }
+
+
+        public void setUnixTimestamp(long unixTimestamp) {
+            this.unixTimestamp = unixTimestamp;
+        }
+
+        public void setCustomerId(int customerId) {
+            this.customerId = customerId;
+        }
+
+        public void setStation(String station) {
+            this.station = station;
         }
     }
 
