@@ -45,7 +45,7 @@ class CustomerSummaryServiceTest {
         Assertions.assertEquals(3, customerSummaries.get(0).getTrips().get(0).getStartedJourneyAt());
         Assertions.assertEquals(200, customerSummaries.get(0).getTrips().get(0).getCostInCents());
         Assertions.assertEquals(4, customerSummaries.get(0).getTrips().get(0).getZoneFrom());
-//  TODO fix this issue      Assertions.assertEquals(3, customerSummaries.get(0).getTrips().get(0).getZoneTo());
+        Assertions.assertEquals(3, customerSummaries.get(0).getTrips().get(0).getZoneTo());
 
 
     }

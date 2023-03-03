@@ -1,5 +1,6 @@
 package com.company.train.service;
 
+import com.company.train.service.price.Price;
 import com.company.train.service.price.TripPricingService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,10 +16,10 @@ class TripPricingServiceTest {
         String stationEnd = "B";
 
         //when
-        double price = tripPricingService.calculatePrice(stationStart, stationEnd);
+        Price price = tripPricingService.calculatePrice(stationStart, stationEnd);
 
         //then
-        Assertions.assertEquals(240D, price);
+        Assertions.assertEquals(240D, price.getPrice());
     }
 
     @Test
@@ -28,10 +29,10 @@ class TripPricingServiceTest {
         String stationEnd = "I";
 
         //when
-        double price = tripPricingService.calculatePrice(stationStart, stationEnd);
+        Price price = tripPricingService.calculatePrice(stationStart, stationEnd);
 
         //then
-        Assertions.assertEquals(200D, price);
+        Assertions.assertEquals(200D, price.getPrice());
     }
 
     @Test
@@ -41,10 +42,10 @@ class TripPricingServiceTest {
         String stationEnd = "G";
 
         //when
-        double price = tripPricingService.calculatePrice(stationStart, stationEnd);
+        Price price = tripPricingService.calculatePrice(stationStart, stationEnd);
 
         //then
-        Assertions.assertEquals(300D, price);
+        Assertions.assertEquals(300D, price.getPrice());
     }
 
     @Test
@@ -54,10 +55,10 @@ class TripPricingServiceTest {
         String stationEnd = "D";
 
         //when
-        double price = tripPricingService.calculatePrice(stationStart, stationEnd);
+        Price price = tripPricingService.calculatePrice(stationStart, stationEnd);
 
         //then
-        Assertions.assertEquals(240D, price);
+        Assertions.assertEquals(240D, price.getPrice());
     }
 
     @Test
@@ -67,10 +68,10 @@ class TripPricingServiceTest {
         String stationEnd = "E";// on the boundary zone 2 and zone 3
 
         //when
-        double price = tripPricingService.calculatePrice(stationStart, stationEnd);
+        Price price = tripPricingService.calculatePrice(stationStart, stationEnd);
 
         //then
-        Assertions.assertEquals(240D, price);
+        Assertions.assertEquals(240D, price.getPrice());
     }
 
 
@@ -81,10 +82,10 @@ class TripPricingServiceTest {
         String stationEnd = "A";
         //when
 
-        double price = tripPricingService.calculatePrice(stationStart, stationEnd);
+        Price price = tripPricingService.calculatePrice(stationStart, stationEnd);
 
         //then
-        Assertions.assertEquals(240D, price);
+        Assertions.assertEquals(240D, price.getPrice());
     }
 
     @Test
@@ -94,10 +95,10 @@ class TripPricingServiceTest {
         String stationEnd = "D";
         //when
 
-        double price = tripPricingService.calculatePrice(stationStart, stationEnd);
+        Price price = tripPricingService.calculatePrice(stationStart, stationEnd);
 
         //then
-        Assertions.assertEquals(280D, price);
+        Assertions.assertEquals(240D, price.getPrice());
     }
 
     @Test
@@ -107,10 +108,10 @@ class TripPricingServiceTest {
         String stationEnd = "E";
         //when
 
-        double price = tripPricingService.calculatePrice(stationStart, stationEnd);
+        Price price = tripPricingService.calculatePrice(stationStart, stationEnd);
 
         //then
-        Assertions.assertEquals(200D, price);
+        Assertions.assertEquals(200D, price.getPrice());
     }
 
     @Test
@@ -120,9 +121,9 @@ class TripPricingServiceTest {
         String stationEnd = "F";
         //when
 
-        double price = tripPricingService.calculatePrice(stationStart, stationEnd);
+        Price price = tripPricingService.calculatePrice(stationStart, stationEnd);
 
         //then
-        Assertions.assertEquals(280D, price);
+        Assertions.assertEquals(280D, price.getPrice());
     }
 }

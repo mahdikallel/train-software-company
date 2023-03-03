@@ -23,21 +23,20 @@ public class CustomerJourneyDTO {
             return unixTimestamp;
         }
 
-        public int getCustomerId() {
-            return customerId;
-        }
-
-        public String getStation() {
-            return station;
-        }
-
-
         public void setUnixTimestamp(long unixTimestamp) {
             this.unixTimestamp = unixTimestamp;
         }
 
+        public int getCustomerId() {
+            return customerId;
+        }
+
         public void setCustomerId(int customerId) {
             this.customerId = customerId;
+        }
+
+        public String getStation() {
+            return station;
         }
 
         public void setStation(String station) {

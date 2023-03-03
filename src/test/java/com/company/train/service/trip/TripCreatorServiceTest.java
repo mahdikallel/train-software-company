@@ -29,27 +29,27 @@ class TripCreatorServiceTest {
         // then
         Assertions.assertEquals(3, trips.size());
 
-        Assertions.assertEquals("B",trips.get(0).getStationStart());
-        Assertions.assertEquals("C",trips.get(0).getStationEnd());
-        Assertions.assertEquals(2,trips.get(0).getStartedJourneyAt());
-        Assertions.assertEquals(240,trips.get(0).getCostInCents());
-        Assertions.assertEquals(1,trips.get(0).getZoneFrom());
-        Assertions.assertEquals(2,trips.get(0).getZoneTo());
+        Assertions.assertEquals("B", trips.get(0).getStationStart());
+        Assertions.assertEquals("C", trips.get(0).getStationEnd());
+        Assertions.assertEquals(2, trips.get(0).getStartedJourneyAt());
+        Assertions.assertEquals(240, trips.get(0).getCostInCents());
+        Assertions.assertEquals(1, trips.get(0).getZoneFrom());
+        Assertions.assertEquals(2, trips.get(0).getZoneTo());
 
 
-        Assertions.assertEquals("H",trips.get(1).getStationStart());
-        Assertions.assertEquals("G",trips.get(1).getStationEnd());
-        Assertions.assertEquals(3,trips.get(1).getStartedJourneyAt());
-        Assertions.assertEquals(200,trips.get(1).getCostInCents());
-        Assertions.assertEquals(4,trips.get(1).getZoneFrom());
-        Assertions.assertEquals(4,trips.get(1).getZoneTo());
+        Assertions.assertEquals("H", trips.get(1).getStationStart());
+        Assertions.assertEquals("G", trips.get(1).getStationEnd());
+        Assertions.assertEquals(3, trips.get(1).getStartedJourneyAt());
+        Assertions.assertEquals(200, trips.get(1).getCostInCents());
+        Assertions.assertEquals(4, trips.get(1).getZoneFrom());
+        Assertions.assertEquals(4, trips.get(1).getZoneTo());
 
 
-        Assertions.assertEquals("D",trips.get(2).getStationStart());
-        Assertions.assertEquals("F",trips.get(2).getStationEnd());
-        Assertions.assertEquals(20,trips.get(2).getStartedJourneyAt());
-        Assertions.assertEquals(280,trips.get(2).getCostInCents());
-        Assertions.assertEquals(2,trips.get(2).getZoneFrom());
-        Assertions.assertEquals(3,trips.get(2).getZoneTo());
+        Assertions.assertEquals("D", trips.get(2).getStationStart());
+        Assertions.assertEquals("F", trips.get(2).getStationEnd());
+        Assertions.assertEquals(20, trips.get(2).getStartedJourneyAt());
+        Assertions.assertEquals(280, trips.get(2).getCostInCents());
+        Assertions.assertEquals(2, trips.get(2).getZoneFrom());
+        Assertions.assertEquals(3, trips.get(2).getZoneTo());
     }
 }

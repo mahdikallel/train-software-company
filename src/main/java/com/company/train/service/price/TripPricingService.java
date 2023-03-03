@@ -1,26 +1,24 @@
 package com.company.train.service.price;
 
-import com.company.train.helper.ZoneByStationHelper;
+import com.company.train.constant.Constant;
+
+import java.util.Comparator;
+import java.util.List;
+
+import static com.company.train.helper.ZoneByStationHelper.STATION_ZONE_BY_STATION_MAP;
 
 public class TripPricingService {
-    private final ZoneByStationHelper zoneByStationHelper = new ZoneByStationHelper();
-    private final TicketPriceSameZoneCalculator ticketPriceSameZoneCalculator = new TicketPriceSameZoneCalculator();
+    public Price calculatePrice(String stationStart, String stationEnd) {
+        List<Integer> startZones = STATION_ZONE_BY_STATION_MAP.get(stationStart);
+        List<Integer> endZones = STATION_ZONE_BY_STATION_MAP.get(stationEnd);
+        return startZones
+                .stream()
+                .flatMap(start ->
+                        endZones
+                                .stream()
+                                .map(end -> new Price(start, end, Constant.ticket_prices[start][end] * Constant.CENT))
+                ).min(Comparator.comparingDouble(Price::getPrice))
+                .orElseThrow(() -> new IllegalArgumentException("station does not exist ! please enter a valid station"));
 
-    private final TicketPriceNoOneStationInOnTheBoundaryCalculator ticketPriceNoOneStationInOnTheBoundaryCalculator = new TicketPriceNoOneStationInOnTheBoundaryCalculator();
-
-    private final TicketPriceOneStationOnTheBoundaryCalculator calculateTicketPriceOneStationOnTheBoundary= new TicketPriceOneStationOnTheBoundaryCalculator();
-
-
-    public double calculatePrice(String stationStart, String stationEnd) {
-        if (zoneByStationHelper.isStationsInSameZone(stationStart, stationEnd)) {
-            return ticketPriceSameZoneCalculator.calculate(stationStart, stationEnd);
-        }
-        if (zoneByStationHelper.isNoOneStationIsOnTheBoundary(stationStart, stationEnd)) {
-            return ticketPriceNoOneStationInOnTheBoundaryCalculator.calculate(stationStart, stationEnd);
-        }
-        if (zoneByStationHelper.atLeastOneStationOnTheBoundary(stationStart, stationEnd)) {
-            return calculateTicketPriceOneStationOnTheBoundary.calculate(stationStart, stationEnd);
-        }
-        return 0;
     }
 }
