@@ -3,17 +3,20 @@ package com.company.train.service;
 import com.company.train.domain.CustomerJourney;
 import com.company.train.domain.CustomerSummary;
 import com.company.train.domain.Tap;
+import com.company.train.service.price.TripPricingService;
+import com.company.train.service.trip.TripCreatorService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 class CustomerSummaryServiceTest {
-
-    CustomerSummaryService customerSummaryService = new CustomerSummaryService();
+    private final TripPricingService tripPricingService = new TripPricingService();
+    private final TripCreatorService tripCreatorService = new TripCreatorService(tripPricingService);
+    private final CustomerSummaryService customerSummaryService = new CustomerSummaryService(tripCreatorService);
 
     @Test
-    public void should_sort_trip_by_timestamp_and_group_trips_by_customer_id() {
+    void should_sort_trip_by_timestamp_and_group_trips_by_customer_id() {
 
         // given
         int customerId_3 = 3;
@@ -33,7 +36,7 @@ class CustomerSummaryServiceTest {
         ));
 
         // when
-        List<CustomerSummary> customerSummaries = customerSummaryService.groupTapsByConsumerId(customerJourney);
+        List<CustomerSummary> customerSummaries = customerSummaryService.groupTapsByCustomerId(customerJourney);
 
         // then
         Assertions.assertEquals(2, customerSummaries.size());

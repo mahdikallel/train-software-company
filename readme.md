@@ -10,4 +10,4 @@ mvn clean install
 
 ## Run
 
-java -jar target/train-software-company-1.0-SNAPSHOT.jar "C:\\......\input.json"  "C:\\......\output.json"
+java -jar target/train-software-company-1.0-SNAPSHOT-jar-with-dependencies.jar "C:\\......\input.json"  "C:\\......\output.json"

@@ -12,10 +12,14 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class CustomerSummaryService {
-    private final TripCreatorService tripCreatorService = new TripCreatorService();
+    private final TripCreatorService tripCreatorService;
+
+    public CustomerSummaryService(TripCreatorService tripCreatorService) {
+        this.tripCreatorService = tripCreatorService;
+    }
 
 
-    public List<CustomerSummary> groupTapsByConsumerId(CustomerJourney customerJourney) {
+    public List<CustomerSummary> groupTapsByCustomerId(CustomerJourney customerJourney) {
         return customerJourney.getTaps()
                 .stream()
                 .sorted(Comparator.comparing(Tap::getUnixTimestamp))
@@ -23,7 +27,7 @@ public class CustomerSummaryService {
                 .entrySet()
                 .stream()
                 .map(this::buildCustomerSummary)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private CustomerSummary buildCustomerSummary(Map.Entry<Integer, List<Tap>> entry) {

@@ -11,18 +11,23 @@ import com.company.train.mapper.CustomerSummaryMapper;
 import com.company.train.reader.FileReader;
 import com.company.train.reader.JsonFileReader;
 import com.company.train.service.CustomerSummaryService;
+import com.company.train.service.price.TripPricingService;
+import com.company.train.service.trip.TripCreatorService;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Main {
 
     private static final Logger logger = Logger.getLogger(Main.class.getName());
+    private static final TripPricingService tripPricingService = new TripPricingService();
+    private static final TripCreatorService tripCreatorService = new TripCreatorService(tripPricingService);
+    private static final CustomerSummaryService customerSummaryService = new CustomerSummaryService(tripCreatorService);
 
-    private static final CustomerSummaryService customerSummaryService = new CustomerSummaryService();
     private static final CustomerJourneyConvertor customerJourneyConvertor = new CustomerJourneyConvertor();
     private static final FileReader fileReader = new JsonFileReader();
 
@@ -30,16 +35,17 @@ public class Main {
         if (args.length == 2) {
             String inputFilePath = args[0];
             String outputFilePath = args[1];
-            logger.info("Input file path" + inputFilePath);
-            logger.info("Output file path" + outputFilePath);
+            logger.log(Level.INFO, "Input file path {0}", inputFilePath);
+            logger.log(Level.INFO, "Output file path {0}", outputFilePath);
 
-            CustomerJourneyDTO convert = customerJourneyConvertor.convert(fileReader.readFileContent(inputFilePath));
-            CustomerJourney customerJourney = CustomerJourneyMapper.INSTANCE.map(convert);
 
-            List<CustomerSummary> customerSummaries = customerSummaryService.groupTapsByConsumerId(customerJourney);
+            CustomerJourneyDTO customerJourneyDTO = customerJourneyConvertor.convert(fileReader.readFileContent(inputFilePath));
+            CustomerJourney customerJourney = CustomerJourneyMapper.INSTANCE.map(customerJourneyDTO);
+
+            List<CustomerSummary> customerSummaries = customerSummaryService.groupTapsByCustomerId(customerJourney);
 
             CustomerSummariesDTO customerSummariesDTOS = CustomerSummaryMapper.INSTANCE.map(customerSummaries);
-            Constant.objectMapper.writeValue(new File(outputFilePath),customerSummariesDTOS);
+            Constant.objectMapper.writeValue(new File(outputFilePath), customerSummariesDTOS);
 
         } else {
             throw new IllegalArgumentException("This program take 2 arguments! Please provide two json files (intput and output)");

@@ -14,8 +14,9 @@ import java.net.URISyntaxException;
 class MainTest {
 
     private final FileReader fileReader = new JsonFileReader();
+
     @Test
-    public void should_validate_file_output() throws IOException, URISyntaxException {
+    void should_validate_file_output() throws IOException, URISyntaxException {
         // given
         String[] args = new String[2];
         args[0] = "src/test/resources/input.txt";
@@ -35,5 +36,18 @@ class MainTest {
                 actual
         );
 
+    }
+
+    @Test
+    void should_throw_exception_when_arg_is_not_equal_to_2() {
+        // given
+        String[] args = new String[3];
+        args[0] = "src/test/resources/input.txt";
+        // when
+
+        // then
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Main.main(args);
+        }, "This program take 2 arguments! Please provide two json files (intput and output)");
     }
 }

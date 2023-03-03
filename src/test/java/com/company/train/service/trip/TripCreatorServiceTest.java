@@ -2,6 +2,7 @@ package com.company.train.service.trip;
 
 import com.company.train.domain.Tap;
 import com.company.train.domain.Trip;
+import com.company.train.service.price.TripPricingService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -9,10 +10,10 @@ import java.util.List;
 
 class TripCreatorServiceTest {
 
-    private final TripCreatorService tripCreatorService = new TripCreatorService();
+    private final TripCreatorService tripCreatorService = new TripCreatorService(new TripPricingService());
 
     @Test
-    public void should_create_trip_from_taps() {
+    void should_create_trip_from_taps() {
         // given
         List<Tap> tapList = List.of(
                 new Tap(2L, 2, "B"),

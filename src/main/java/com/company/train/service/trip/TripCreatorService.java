@@ -10,7 +10,12 @@ import java.util.List;
 
 public class TripCreatorService {
 
-    private final TripPricingService tripPricingService = new TripPricingService();
+    private final TripPricingService tripPricingService;
+
+    public TripCreatorService(TripPricingService tripPricingService) {
+        this.tripPricingService = tripPricingService;
+    }
+
     public List<Trip> create(List<Tap> taps) {
         List<Trip> trips = new ArrayList<>();
         for (int i = 0; i < taps.size(); i = i + 2) {
