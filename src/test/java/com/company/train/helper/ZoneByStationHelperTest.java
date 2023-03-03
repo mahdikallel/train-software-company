@@ -94,5 +94,18 @@ class ZoneByStationHelperTest {
         Assertions.assertTrue(stationsInSameZone);
     }
 
+    @Test
+    public void should_return_lowest_zone_when_station_on_the_boundary(){
+        // given
+        String stationOnTheBoundary = "C"; // on the boundary zone 2 and zone 3
+
+
+        //when
+        Integer zoneByStation = zoneByStationHelper.getZoneByStation(stationOnTheBoundary);
+
+        // then
+        Assertions.assertEquals(2,zoneByStation);
+    }
+
 
 }

@@ -24,6 +24,16 @@ public class ZoneByStationHelper {
         return new ArrayList<>(zones);
     }
 
+    public List<Integer> getStationBoundaryZones(String station) {
+        Set<Integer> zones = new HashSet<>();
+        for (Map.Entry<Integer, List<String>> entry : STATION_ZONE_MAP.entrySet()) {
+            if (entry.getValue().stream().anyMatch(s -> s.equals(station) )) {
+                zones.add(entry.getKey());
+            }
+        }
+        return new ArrayList<>(zones);
+    }
+
     public boolean isStationsInSameZone(String stationStart, String stationEnd) {
         return this.getZonesByStationEndPoint(stationStart, stationEnd).size() == 1;
     }
@@ -34,5 +44,14 @@ public class ZoneByStationHelper {
 
     public boolean atLeastOneStationOnTheBoundary(String stationStart, String stationEnd) {
         return this.getZonesByStationEndPoint(stationStart, stationEnd).size() == 3;
+    }
+
+    public Integer getZoneByStation(String station) {
+        return STATION_ZONE_MAP.entrySet()
+                .stream()
+                .filter(integerListEntry -> integerListEntry.getValue().stream().anyMatch(s -> s.equals(station)))
+                .map(Map.Entry::getKey)
+                .min(Integer::compareTo)
+                .orElseThrow(() -> new IllegalArgumentException("Station not found in any zone"));
     }
 }
