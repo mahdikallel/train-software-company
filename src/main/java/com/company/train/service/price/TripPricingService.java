@@ -16,7 +16,7 @@ public class TripPricingService {
                 .flatMap(start ->
                         endZones
                                 .stream()
-                                .map(end -> new Price(start, end, Constant.ticket_prices[start][end] * Constant.CENT))
+                                .map(end -> new Price(start, end, (int) (Constant.ticket_prices[start][end] * Constant.CENT)))
                 ).min(Comparator.comparingDouble(Price::getPrice))
                 .orElseThrow(() -> new IllegalArgumentException("station does not exist ! please enter a valid station"));
 

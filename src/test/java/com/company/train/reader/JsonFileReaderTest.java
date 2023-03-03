@@ -18,7 +18,7 @@ class JsonFileReaderTest {
 
         // when
 
-        String fileContent = jsonFileReader.readFileContent("src/test/resources/CandidateInputExample.txt");
+        String fileContent = jsonFileReader.readFileContent("src/test/resources/input.txt");
         // then
         Assertions.assertFalse(fileContent.isEmpty());
     }

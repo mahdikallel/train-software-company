@@ -9,9 +9,13 @@ public class CustomerSummariesDTO {
         return customerSummaries;
     }
 
+    public void setCustomerSummaries(List<CustomerSummaryDTO> customerSummaries) {
+        this.customerSummaries = customerSummaries;
+    }
+
     public static class CustomerSummaryDTO {
         private int customerId;
-        private double totalCostInCents;
+        private int totalCostInCents;
 
         private List<TripsDTO> trips;
 
@@ -19,21 +23,57 @@ public class CustomerSummariesDTO {
             return customerId;
         }
 
-        public double getTotalCostInCents() {
+        public List<TripsDTO> getTrips() {
+            return trips;
+        }
+
+        public void setCustomerId(int customerId) {
+            this.customerId = customerId;
+        }
+
+        public int getTotalCostInCents() {
             return totalCostInCents;
         }
 
-        public List<TripsDTO> getTrips() {
-            return trips;
+        public void setTotalCostInCents(int totalCostInCents) {
+            this.totalCostInCents = totalCostInCents;
+        }
+
+        public void setTrips(List<TripsDTO> trips) {
+            this.trips = trips;
         }
 
         public static class TripsDTO {
             private String stationStart;
             private String stationEnd;
             private long startedJourneyAt;
-            private double costInCents;
+            private int costInCents;
             private int zoneFrom;
             private int zoneTo;
+
+            public void setStationStart(String stationStart) {
+                this.stationStart = stationStart;
+            }
+
+            public void setStationEnd(String stationEnd) {
+                this.stationEnd = stationEnd;
+            }
+
+            public void setStartedJourneyAt(long startedJourneyAt) {
+                this.startedJourneyAt = startedJourneyAt;
+            }
+
+            public void setCostInCents(int costInCents) {
+                this.costInCents = costInCents;
+            }
+
+            public void setZoneFrom(int zoneFrom) {
+                this.zoneFrom = zoneFrom;
+            }
+
+            public void setZoneTo(int zoneTo) {
+                this.zoneTo = zoneTo;
+            }
 
             public String getStationStart() {
                 return stationStart;
@@ -47,7 +87,7 @@ public class CustomerSummariesDTO {
                 return startedJourneyAt;
             }
 
-            public double getCostInCents() {
+            public int getCostInCents() {
                 return costInCents;
             }
 

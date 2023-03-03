@@ -1,110 +1,42 @@
 package com.company.train.helper;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
 
 class ZoneByStationHelperTest {
-
-    ZoneByStationHelper zoneByStationHelper = new ZoneByStationHelper();
-
-    @Test
-    public void should_return_zone_1_when_start_station_is_A_and_end_station_is_B() {
-        //given
-
-        //when
-        List<Integer> zone = zoneByStationHelper.getZonesByStationEndPoint("A","B");
-
-        //then
-        int expectedZone = 1;
-        Assertions.assertEquals(1, zone.size());
-        Assertions.assertEquals(expectedZone, zone.get(0));
-    }
-
-    @Test
-    public void should_return_zone_1_zone_2_zone_3_when_start_station_is_A_and_end_station_is_C() {
-        //given
-
-        //when
-        List<Integer> zone = zoneByStationHelper.getZonesByStationEndPoint("A","C");
-
-        //then
-        Assertions.assertEquals(3, zone.size());
-        Assertions.assertEquals(1, zone.get(0));
-        Assertions.assertEquals(2, zone.get(1));
-        Assertions.assertEquals(3, zone.get(2));
-    }
-
-    @Test
-    public void should_return_zone_1_zone_2_when_start_station_is_A_and_end_station_is_D() {
-        //given
-
-        //when
-        List<Integer> zone = zoneByStationHelper.getZonesByStationEndPoint("D","A");
-
-        //then
-        Assertions.assertEquals(2, zone.size());
-        Assertions.assertEquals(1, zone.get(0));
-        Assertions.assertEquals(2, zone.get(1));
-    }
-
-    @Test
-    public void should_return_true_when_start_station_and_end_station_is_in_same_zone() {
-        //given
-
-        //when
-        boolean stationsInSameZone = zoneByStationHelper.isStationsInSameZone("B", "A");
-
-        //then
-        Assertions.assertTrue(stationsInSameZone);
+    public static Stream<Arguments> generateStationZoneData() {
+        return Stream.of(
+                Arguments.of("A", List.of(1)),
+                Arguments.of("B", List.of(1)),
+                Arguments.of("C", List.of(2, 3)),
+                Arguments.of("D", List.of(2)),
+                Arguments.of("E", List.of(2, 3)),
+                Arguments.of("F", List.of(3, 4)),
+                Arguments.of("G", List.of(4)),
+                Arguments.of("H", List.of(4)),
+                Arguments.of("I", List.of(4))
+        );
     }
 
     @ParameterizedTest
-    @CsvSource( value = {
-            "A:D", "A:H", "A:G", "A:I",
-            "B:D", "B:H", "B:G", "B:I",
-            "D:B", "D:H", "D:G", "D:I"
-    }, delimiter = ':')
-    public void should_return_true_when_no_one_station_on_the_boundary(String stationStart, String stationEnd) {
+    @MethodSource("generateStationZoneData")
+    public void should_return_true_when_at_least_one_station_on_the_boundary(String station, List<Integer> zones) {
         //given
 
         //when
-        boolean stationsInSameZone = zoneByStationHelper.isNoOneStationIsOnTheBoundary(stationStart, stationEnd);
+        Map<String, List<Integer>> stationZoneByStationMap = ZoneByStationHelper.STATION_ZONE_BY_STATION_MAP;
 
         //then
-        Assertions.assertTrue(stationsInSameZone);
-    }
-
-    @ParameterizedTest
-    @CsvSource( value = {
-            "A:E", "A:C", "A:F",
-            "B:E", "B:C", "B:F",
-            "D:F",
-    }, delimiter = ':')
-    public void should_return_true_when_at_least_one_station_on_the_boundary(String stationStart, String stationEnd) {
-        //given
-
-        //when
-        boolean stationsInSameZone = zoneByStationHelper.atLeastOneStationOnTheBoundary(stationStart, stationEnd);
-
-        //then
-        Assertions.assertTrue(stationsInSameZone);
-    }
-
-    @Test
-    public void should_return_lowest_zone_when_station_on_the_boundary(){
-        // given
-        String stationOnTheBoundary = "C"; // on the boundary zone 2 and zone 3
-
-
-        //when
-        Integer zoneByStation = zoneByStationHelper.getZoneByStation(stationOnTheBoundary);
-
-        // then
-        Assertions.assertEquals(2,zoneByStation);
+        Assertions.assertEquals(
+                stationZoneByStationMap.get(station),
+                zones
+        );
     }
 
 

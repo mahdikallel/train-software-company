@@ -17,7 +17,7 @@ public class TripCreatorService {
             Tap firstTap = taps.get(i);
             Tap lastTap = taps.get(i + 1);
             Price price = tripPricingService.calculatePrice(firstTap.getStation(), lastTap.getStation());
-            double tripCost = price.getPrice();
+            int tripCost = price.getPrice();
             int zoneFrom = price.getZoneStart();
             int zoneTo = price.getZoneEnd();
             trips.add(

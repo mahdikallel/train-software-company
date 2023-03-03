@@ -5,9 +5,9 @@ import java.util.Objects;
 public class Price {
     private final Integer zoneStart;
     private final Integer zoneEnd;
-    private final double price;
+    private final int price;
 
-    public Price(Integer zoneStart, Integer zoneEnd, double price) {
+    public Price(Integer zoneStart, Integer zoneEnd, int price) {
         this.zoneStart = zoneStart;
         this.zoneEnd = zoneEnd;
         this.price = price;
@@ -21,7 +21,7 @@ public class Price {
         return zoneEnd;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 

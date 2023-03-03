@@ -5,11 +5,11 @@ public class Trip {
     private final String stationStart;
     private final String stationEnd;
     private final long startedJourneyAt;
-    private final double costInCents;
+    private final int costInCents;
     private final int zoneFrom;
     private final int zoneTo;
 
-    public Trip(String stationStart, String stationEnd, long startedJourneyAt, double costInCents, int zoneFrom, int zoneTo) {
+    public Trip(String stationStart, String stationEnd, long startedJourneyAt, int costInCents, int zoneFrom, int zoneTo) {
         this.stationStart = stationStart;
         this.stationEnd = stationEnd;
         this.startedJourneyAt = startedJourneyAt;
@@ -30,7 +30,8 @@ public class Trip {
         return startedJourneyAt;
     }
 
-    public double getCostInCents() {
+
+    public int getCostInCents() {
         return costInCents;
     }
 

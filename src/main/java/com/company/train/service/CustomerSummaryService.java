@@ -28,7 +28,7 @@ public class CustomerSummaryService {
 
     private CustomerSummary buildCustomerSummary(Map.Entry<Integer, List<Tap>> entry) {
         List<Trip> trips = tripCreatorService.create(entry.getValue());
-        double totalCostInCents = trips.stream().map(Trip::getCostInCents).reduce(0D, Double::sum);
+        int totalCostInCents = trips.stream().map(Trip::getCostInCents).reduce(0, Integer::sum);
         return new CustomerSummary(entry.getKey(), totalCostInCents, trips);
     }
 }
